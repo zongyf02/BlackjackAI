@@ -30,7 +30,7 @@ The fitness or performance is simply the average number of rounds an AI can play
 # Difference to other machine-learning blackjack AI
 This AI has to not only decide whether to hit or stand, it also has to decide how much to bet, when to place insurance, and when to split or double. It significantly outperforms AIs that only decide whether to hit or stand.
 
-This AI does not seek to replicate basic strategy either. Many other machine learning blackjack AIs seek to replicate the basic stategy chart. However, even when basic strat is played perfectly, the dealer still has around 0.5% edge. In other words, AIs that try to replicate the basic strat cannot "beat the dealer". This AI, on the other hand, takes advantage of card-counting. Thanks to the Griffins 5 and Griffin 7 systems it uses, it outperforms the high-low card-counting and the Illustrious 18 deviations by 60%. It also outperforms basic strategy by over 250%.
+This AI does not seek to replicate basic strategy either. Many other machine learning blackjack AIs seek to replicate the basic stategy chart. However, even when basic strat is played perfectly, the dealer still has around 0.5% edge. In other words, AIs that try to replicate the basic strat cannot "beat the dealer". This AI, on the other hand, takes advantage of card-counting. Thanks to the Griffins 5 and Griffin 7 systems it uses, it can beat the dealer (assuming that you only let it play above a true count of -1, as per standard blackjack card-counting practice).
 
 # AI in more detail
 The new AI player's chromosome has 4 neural networks.
