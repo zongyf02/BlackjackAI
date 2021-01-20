@@ -1,6 +1,6 @@
 
 /**
- * Purpose: Trainan AI with genetic algo
+* Purpose: Trainan AI with genetic algo
  * Author: Yifan Zong
  * Created on: 1/2/21
  */
@@ -19,6 +19,8 @@ public class AITrainer {
 	private int gen;
 	private Chromosome[] population;
 
+	// Set population size, mutation rate, mutation step, and create the appropriate
+	// amount of new chromosomes
 	public AITrainer(int populationSize, double mutationRate, double mutationStep) {
 		gen = 0;
 		this.mutationRate = mutationRate;
@@ -146,6 +148,7 @@ public class AITrainer {
 	// permission to continue
 	public void train() {
 		while (true) {
+			// Sort population by fitness
 			Arrays.parallelSort(population, new Comparator<Chromosome>() {
 				@Override
 				public int compare(Chromosome chromosome1, Chromosome chromosome2) {
@@ -153,6 +156,7 @@ public class AITrainer {
 				}
 			});
 
+			// Serialize and store the elite
 			Chromosome elite0 = population[0];
 			try {
 				FileOutputStream fileOut = new FileOutputStream("Elite0" + "Gen" + gen + ".ser");
@@ -168,6 +172,7 @@ public class AITrainer {
 
 			System.out.println("Gen" + gen + ": " + elite0.fitness());
 
+			// Let the top 10% breed for the new 10% of the population
 			Chromosome[] newPopulation = new Chromosome[population.length];
 			for (int j = 0; j < (int) (newPopulation.length * 0.1); j++) {
 				int rnd1 = 0, rnd2 = 0;
@@ -179,6 +184,7 @@ public class AITrainer {
 				newPopulation[j] = newChromosome.mutate(mutationRate, mutationStep);
 			}
 
+			// Let a new 75% bred from the old top 50%
 			for (int j = (int) (newPopulation.length * 0.1); j < (int) (newPopulation.length * 0.85); j++) {
 				int rnd1 = 0, rnd2 = 0;
 				while (rnd1 == rnd2) {
@@ -189,6 +195,8 @@ public class AITrainer {
 				newPopulation[j] = newChromosome.mutate(mutationRate, mutationStep);
 			}
 
+			// Let the last 15% be from random breeding of the whole old population
+			// Significantly increases genetic diversity
 			for (int j = (int) (newPopulation.length * 0.85); j < newPopulation.length; j++) {
 				int rnd1 = 0, rnd2 = 0;
 				while (rnd1 == rnd2) {
@@ -244,7 +252,7 @@ public class AITrainer {
 	}
 
 	public static void main(String[] args) {
-		AITrainer trainer = new AITrainer(0, 0, 0); //Select population, mutation rate, and step
+		AITrainer trainer = new AITrainer(0, 0, 0); // Select population, mutation rate, and step
 //		trainer.train();
 		for (int i = 0; i < 145; i++) {
 			double fitness = 0;

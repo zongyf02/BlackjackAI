@@ -1,5 +1,6 @@
 /**
- * Purpose: A Chromsome of an AI player with linear transformations
+ * Purpose: A Chromsome of an AI player with 4 neural networks
+ * 1 for betting, 1 for insurance, 1 for splitting, and 1 for non-split plays
  * Author: Yifan Zong
  * Created on: 1/2/21
  */
@@ -194,6 +195,7 @@ public class Chromosome implements Serializable {
 		return this.fitness;
 	}
 
+	//Return the fitness
 	public double fitness() {
 		return fitness;
 	}
